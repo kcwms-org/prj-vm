@@ -10,8 +10,9 @@ services:
         - MONGO_USERNAME
         - MONGO_CLIENT_PROTOCOL
         - MONGO_SERVER_AND_PORT
+        - PORT=${PORT-5050}
     ports:
-      - "3000:3000" # Expose server on port 8080
+      - "${PORT-5050}:${PORT-5050}" # Expose server on port 8080
     depends_on:
       - mongodb
     networks:
