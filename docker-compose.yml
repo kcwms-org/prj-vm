@@ -6,8 +6,10 @@ services:
       context: ./server
       dockerfile: Dockerfile
       args:
-        - MONGO_URI
-        - PORT=3000
+        - MONGO_PWD
+        - MONGO_USERNAME
+        - MONGO_CLIENT_PROTOCOL
+        - MONGO_SERVER_AND_PORT
     ports:
       - "3000:3000" # Expose server on port 8080
     depends_on:
