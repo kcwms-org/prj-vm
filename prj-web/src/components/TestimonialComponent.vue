@@ -3,7 +3,7 @@
     <h2>Add Your Testimonial</h2>
     <div>
       <label for="rating">Rating:</label>
-      <select id="rating" v-model="testimonial.rating">
+      <select id="rating" v-model="data.rating">
         <option value=""></option>
         <option :value="Rating.One">{{ Rating[Rating.One] }}</option>
         <option :value="Rating.Two">{{ Rating[Rating.Two] }}</option>
@@ -14,25 +14,25 @@
     </div>
     <div>
       <label for="comment">Comment:</label>
-      <textarea id="comment" v-model="testimonial.text"></textarea>
+      <textarea id="comment" v-model="data.text"></textarea>
     </div>
     <div>
       <label for="name">Name:</label>
-      <input id="name" type="text" v-model="testimonial.name" />
+      <input id="name" type="text" v-model="data.name" />
     </div>
   </div>
 
   <div
-    v-bind:id="`testimonialid-${testimonial._id}`"
+    v-bind:id="`testimonialid-${data._id}`"
     class="testimonial-report"
     v-if="!inEditMode"
     style="padding-bottom: 1em"
   >
-    <p>Rating &nbsp; : &nbsp;{{ testimonial.rating }}</p>
-    <p>{{ testimonial.text }}</p>
+    <p>Rating &nbsp; : &nbsp;{{ data.rating }}</p>
+    <p>{{ data.text }}</p>
     <p>
-      <span style="text-align: right"> -- {{ testimonial.name }}</span>
-      <span>{{ testimonial.createdAt }}</span>
+      <span style="text-align: right"> -- {{ data.name }}</span>
+      <span>{{ data.createdAt }}</span>
     </p>
     <hr style="border-style: dashed" />
   </div>
@@ -41,7 +41,6 @@
 <script setup lang="ts">
 import { Rating } from "@/models/Rating.enum";
 import Testimonial from "@/models/Testimonial.model";
-import { ref } from "vue";
 const props = defineProps({
   testimonial: {
     type: Object as () => Testimonial,
@@ -53,6 +52,8 @@ const props = defineProps({
     default: false,
   },
 });
+
+const data: Testimonial = props.testimonial;
 </script>
 
 <style scoped>
