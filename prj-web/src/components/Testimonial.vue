@@ -1,5 +1,5 @@
 <template>
-  <div class="testimonial">
+  <div class="testimonial" v-if="inEditMode">
     <h2>Add Your Testimonial</h2>
     <div>
       <label for="rating">Rating:</label>
@@ -17,8 +17,24 @@
       <textarea id="comment" v-model="testimonial.text"></textarea>
     </div>
     <div>
-      <label>Name<input type="text" v-model="testimonial.name" /></label>
+      <label for="name">Name:</label>
+      <input id="name" type="text" v-model="testimonial.name" />
     </div>
+  </div>
+
+  <div
+    v-bind:id="`testimonialid-${testimonial._id}`"
+    class="testimonial-report"
+    v-if="!inEditMode"
+    style="padding-bottom: 1em"
+  >
+    <p>Rating &nbsp; : &nbsp;{{ testimonial.rating }}</p>
+    <p>{{ testimonial.text }}</p>
+    <p>
+      <span style="text-align: right"> -- {{ testimonial.name }}</span>
+      <span>{{ testimonial.createdAt }}</span>
+    </p>
+    <hr style="border-style: dashed" />
   </div>
 </template>
 
@@ -32,6 +48,10 @@ const props = defineProps({
     required: false,
     default: () => new Testimonial(Rating.Four, "I love this service"),
   },
+  inEditMode: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -39,6 +59,12 @@ const props = defineProps({
 .testimonial {
   max-width: 600px;
   margin: 0 auto;
+}
+.testimonial textarea,
+input,
+select {
+  border-style: dashed;
+  margin-left: 3px;
 }
 form {
   margin-bottom: 20px;

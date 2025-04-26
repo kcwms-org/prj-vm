@@ -1,13 +1,55 @@
 <script setup lang="ts">
 import Testimonial from "./models/Testimonial.model";
 import TestimonialComponent from "./components/Testimonial.vue";
-import { Rating } from "./models/Rating.enum";
+import api from "./services/ApiService";
+import { ref } from "vue";
 
 const testimonialSvcBaseUrl = "http://rd.kevcoder.com:3000/";
 
-const testimonials: Testimonial[] = [new Testimonial(Rating.Five, "Kevin is so good!")];
+const apiSvc = new api<Testimonial>(testimonialSvcBaseUrl);
 
-console.log(`GET ${testimonialSvcBaseUrl}testimonials => `, testimonials);
+let testimonial = ref<Testimonial>(new Testimonial(5, ""));
+const existingTestimonials = ref<Testimonial[]>([]);
+
+function getTestimonials(testimonialToHighlight?: string) {
+  apiSvc
+    .get("testimonials")
+    .then((response) => {
+      existingTestimonials.value = response;
+      console.log(`GET ${testimonialSvcBaseUrl}testimonials => `, existingTestimonials);
+
+      if (testimonialToHighlight) {
+        const testimonialElement = document.querySelector(
+          `#testimonialid-${testimonialToHighlight}`
+        );
+        if (testimonialElement) {
+          testimonialElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    })
+    .catch((error) => {
+      console.error(`Error fetching from ${testimonialSvcBaseUrl}testimonials:`, error);
+    });
+}
+
+function saveTestimonial() {
+  apiSvc
+    .post("testimonials", testimonial.value)
+    .then((response) => {
+      console.log(`POST ${testimonialSvcBaseUrl}testimonials => `, response);
+      if (response.acknowledged) {
+        testimonial.value = new Testimonial(5, "");
+        getTestimonials(response.insertedId);
+      } else {
+        console.error(`Error posting to ${testimonialSvcBaseUrl}testimonials:`, response);
+      }
+    })
+    .catch((error) => {
+      console.error(`Error posting to ${testimonialSvcBaseUrl}testimonials:`, error);
+    });
+}
+
+getTestimonials();
 </script>
 
 <template>
@@ -15,13 +57,26 @@ console.log(`GET ${testimonialSvcBaseUrl}testimonials => `, testimonials);
     <!-- <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" /> -->
 
     <div class="wrapper">
-      <TestimonialComponent :testimonial="testimonials[0]" ></TestimonialComponent>
+      <div class="wrapper-testimonial">
+        <TestimonialComponent
+          :in-edit-mode="true"
+          :testimonial="testimonial"
+        ></TestimonialComponent>
+      </div>
+      <div class="wrapper-button">
+        <button @click="saveTestimonial">Save</button>
+      </div>
     </div>
   </header>
 
   <main>
-    <div>Testimonial List will go here</div>
+    <TestimonialComponent v-for="t in existingTestimonials" :testimonial="t"></TestimonialComponent>
   </main>
+
+  <pre style="max-width: 600px; font-family: 'Lucida Console'">
+      {{ JSON.stringify(testimonial, null, 2) }}
+    </pre
+  >
 </template>
 
 <style scoped>

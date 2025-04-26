@@ -13,7 +13,7 @@ export default class ApiService<T> {
     return response.json();
   }
 
-  async post(endpoint: string, data: T): Promise<T> {
+  async post(endpoint: string, data: T): Promise<{acknowledged: boolean; insertedId: string}> {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: "POST",
       headers: {
