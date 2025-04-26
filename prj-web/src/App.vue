@@ -1,19 +1,26 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Testimonial from "./models/Testimonial.model";
+import TestimonialComponent from "./components/Testimonial.vue";
+import { Rating } from "./models/Rating.enum";
+
+const testimonialSvcBaseUrl = "http://rd.kevcoder.com:3000/";
+
+const testimonials: Testimonial[] = [new Testimonial(Rating.Five, "Kevin is so good!")];
+
+console.log(`GET ${testimonialSvcBaseUrl}testimonials => `, testimonials);
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <!-- <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" /> -->
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <TestimonialComponent :testimonial="testimonials[0]" ></TestimonialComponent>
     </div>
   </header>
 
   <main>
-    <TheWelcome />
+    <div>Testimonial List will go here</div>
   </main>
 </template>
 
