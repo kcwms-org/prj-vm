@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Testimonial from "./models/Testimonial.model";
-import TestimonialComponent from "./components/Testimonial.vue";
+import TestimonialComponent from "./components/TestimonialComponent.vue";
 import api from "./services/ApiService";
 import { ref } from "vue";
 
@@ -8,7 +8,7 @@ const testimonialSvcBaseUrl = "http://rd.kevcoder.com:3000/";
 
 const apiSvc = new api<Testimonial>(testimonialSvcBaseUrl);
 
-let testimonial = ref<Testimonial>(new Testimonial(5, ""));
+const testimonial = ref<Testimonial>(new Testimonial(5, ""));
 const existingTestimonials = ref<Testimonial[]>([]);
 
 function getTestimonials(testimonialToHighlight?: string) {
@@ -33,6 +33,10 @@ function getTestimonials(testimonialToHighlight?: string) {
 }
 
 function saveTestimonial() {
+  if (!testimonial.value._id) {
+    testimonial.value.createdAt = new Date();
+  }
+
   apiSvc
     .post("testimonials", testimonial.value)
     .then((response) => {
@@ -70,7 +74,11 @@ getTestimonials();
   </header>
 
   <main>
-    <TestimonialComponent v-for="t in existingTestimonials" :testimonial="t"></TestimonialComponent>
+    <TestimonialComponent
+      v-for="t in existingTestimonials"
+      :key="t._id"
+      :testimonial="t"
+    ></TestimonialComponent>
   </main>
 
   <pre style="max-width: 600px; font-family: 'Lucida Console'">
