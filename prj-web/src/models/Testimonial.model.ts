@@ -1,7 +1,7 @@
 import { Rating } from "./Rating.enum";
 
 export default class Testimonial {
-  _id: number | undefined;
+  _id: string | undefined;
   createdAt: Date;
   hideEmail: boolean = true;
   name: string | undefined;
