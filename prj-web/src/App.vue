@@ -4,7 +4,7 @@ import TestimonialComponent from "./components/TestimonialComponent.vue";
 import api from "./services/ApiService";
 import { ref } from "vue";
 
-const testimonialSvcBaseUrl = "http://rd.kevcoder.com:3000/";
+const testimonialSvcBaseUrl = import.meta.env.VITE_SERVER_URL || "http://tbd/";
 
 const apiSvc = new api<Testimonial>(testimonialSvcBaseUrl);
 
