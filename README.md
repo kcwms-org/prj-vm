@@ -10,6 +10,7 @@
     MONGO_USERNAME="<username>"
     MONGO_CLIENT_PROTOCOL="<mongodb|mongodb+srv>"
     MONGO_SERVER_AND_PORT="mongodb:<27017>"
+    PORT_UI=<web-frontend-port-number>
     PORT="<web-server-port-number>"
 ```
 
