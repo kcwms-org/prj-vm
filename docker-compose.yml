@@ -49,15 +49,15 @@ services:
       - prj-testimonial-network
     restart: unless-stopped
 
-  ubuntu:
-    image: ubuntu:latest
-    container_name: prj-testimonial-ubuntu
-    tty: true
-    stdin_open: true
-    networks:
-      - prj-testimonial-network
-    restart: unless-stopped
-    command: bash
+  # ubuntu:
+  #   image: ubuntu:latest
+  #   container_name: prj-testimonial-ubuntu
+  #   tty: true
+  #   stdin_open: true
+  #   networks:
+  #     - prj-testimonial-network
+  #   restart: unless-stopped
+  #   command: bash
 
 volumes:
   prj_vm_mongodata:
