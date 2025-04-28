@@ -1,39 +1,12 @@
 # prj-web
 
-This template should help get you started developing with Vue 3 in Vite.
+## Expected Environment Variables
 
-## Recommended IDE Setup
+1. VITE_SERVER_URL=<base_url_to_server>
+    
+    - from a [.env file](https://vite.dev/guide/env-and-mode.html#env-files)
+    - from your OS environment variables
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+        - that you set with Docker
+        - that you set using your OS
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
