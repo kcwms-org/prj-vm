@@ -1,9 +1,10 @@
 # Stage 1: Build the Vue.js app
 FROM node:23-slim AS build-stage
 
-ARG PORT
-
-ENV PORT=$PORT
+# Receive arguments from ../../docker-compose.yml
+ARG API_SERVER_URL
+# Set environment variables
+ENV VITE_SERVER_URL=${API_SERVER_URL}
 
 # Set the working directory
 WORKDIR /app

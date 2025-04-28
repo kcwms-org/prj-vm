@@ -6,7 +6,7 @@ services:
       context: ./prj-web
       dockerfile: Dockerfile
       args:
-        - PORT=${PORT-5173}
+        - API_SERVER_URL=http://server:${PORT-5050}/
     ports:
       - "${PORT_UI-5173}:80"
     depends_on:
