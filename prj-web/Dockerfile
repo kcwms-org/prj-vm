@@ -18,7 +18,7 @@ RUN npm install
 COPY . .
 
 # Build the Vue.js app
-RUN npm run prod
+RUN npm run build
 
 # Stage 2: Serve the app with a lightweight web server
 FROM nginx:stable-alpine AS production-stage
