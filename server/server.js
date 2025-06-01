@@ -5,7 +5,7 @@ import testimonials from "./routes/testimonial.js";
 const PORT = process.env.PORT || 5050;
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE", allowedHeaders: "*" }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
