@@ -27,7 +27,7 @@
 
     - curl --request GET --url http://localhost:3000/testimonials
     - curl --request POST --url http://localhost:3000/testimonials --data '{}'
-    - curl --request POST --url http://localhost:3000/testimonials/:id
+    - curl --request GET --url http://localhost:3000/testimonials/:id
     - curl --request PATCH --url http://localhost:3000/testimonials --data '{}'
     - curl --request DELETE --url http://localhost:3000/testimonials/:id 
 
@@ -41,4 +41,20 @@
   "rating": 4,
   "text": "I So loved your professionalism!"
 }
+```
+
+## Debugging the site
+
+### Validate the contents of the .env file
+```shell
+    cat ./.env
+```
+### If you want to test against a local mongodb, create and/or start the mongodb container
+```shell
+docker compose -f ./docker-compose.dev.yml --env-file ./.env up --detach
+```
+### Run the web site
+```shell
+cd ./server/
+npm run start
 ```

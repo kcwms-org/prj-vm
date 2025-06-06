@@ -1,11 +1,12 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const dbUser = encodeURIComponent( process.env.DB_USER || "");
-const dbPassword = encodeURIComponent( process.env.DB_PASSWORD || "");
-const dbProtocol = process.env.MONGO_PROTOCOL || "";
-const dbServerAndPort = process.env.SERVER_AND_PORT || "";
+const dbUser = encodeURIComponent( process.env.MONGO_USERNAME || "");
+const dbPassword = encodeURIComponent( process.env.MONGO_PWD || "");
+const dbProtocol = process.env.MONGO_CLIENT_PROTOCOL || "";
+const dbServerAndPort = process.env.MONGO_SERVER_AND_PORT || "";
 
 const URI = `${dbProtocol}://${dbUser}:${dbPassword}@${dbServerAndPort}`;
+console.log(`Connecting to MongoDB at ${URI}`);
 const client = new MongoClient(URI, {
   serverApi: {
     version: ServerApiVersion.v1,
