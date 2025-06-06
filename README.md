@@ -27,7 +27,7 @@
 
     - curl --request GET --url http://localhost:3000/testimonials
     - curl --request POST --url http://localhost:3000/testimonials --data '{}'
-    - curl --request POST --url http://localhost:3000/testimonials/:id
+    - curl --request GET --url http://localhost:3000/testimonials/:id
     - curl --request PATCH --url http://localhost:3000/testimonials --data '{}'
     - curl --request DELETE --url http://localhost:3000/testimonials/:id 
 
