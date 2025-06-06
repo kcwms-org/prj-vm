@@ -1,0 +1,20 @@
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: prj-testimonial-mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PWD}
+    ports:
+      - 27017:27017
+    volumes:
+      - prj_vm_mongodata:/data/db
+    restart: unless-stopped
+
+volumes:
+  prj_vm_mongodata:
+    driver: local
+
+networks:
+  prj-testimonial-network:
+    driver: bridge
