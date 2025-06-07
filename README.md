@@ -54,8 +54,13 @@
 ```shell
 docker compose -f ./docker-compose.dev.yml --env-file ./.env up --detach
 ```
-### Run the web site
+### Run the backend
 ```shell
 cd ./server/
 npm run start
+```
+### Run the frontend
+```shell
+cd ./prj-web/
+npm run dev
 ```
