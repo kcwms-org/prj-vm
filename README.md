@@ -11,8 +11,8 @@
     MONGO_CLIENT_PROTOCOL="<mongodb|mongodb+srv>"
     MONGO_SERVER_AND_PORT="mongodb:<27017>"
     PORT_UI=<web-frontend-port-number>
-    PORT="<web-server-port-number>"
-    VITE_SERVER_URL="<web-server-port>://<web-server-domain-name>:${PORT}"
+    PORT="<web-backend-port-number>"
+    VITE_SERVER_URL="<web-backend-port>://<web-server-domain-name>:${PORT}"
 ```
 
 ### To start the server
