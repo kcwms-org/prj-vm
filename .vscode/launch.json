@@ -10,8 +10,7 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:5173",
-            "webRoot": "${workspaceFolder}/prj-web",
-            "runtimeExecutable": "/var/lib/flatpak/exports/bin/com.google.Chrome"
+            "webRoot": "${workspaceFolder}/prj-web"
         }
     ]
 }
