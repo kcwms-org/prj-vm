@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import Testimonial from "./models/Testimonial.model";
-import TestimonialComponent from "./components/TestimonialComponent.vue";
-import api from "./services/ApiService";
+import Carousel from 'primevue/carousel';
 import { ref } from "vue";
+import TestimonialComponent from "./components/TestimonialComponent.vue";
+import Testimonial from "./models/Testimonial.model";
+import api from "./services/ApiService";
 
 const testimonialSvcBaseUrl = import.meta.env.VITE_SERVER_URL || "http://tbd/";
 
@@ -10,6 +11,28 @@ const apiSvc = new api<Testimonial>(testimonialSvcBaseUrl);
 
 const testimonial = ref<Testimonial>(new Testimonial(5, ""));
 const existingTestimonials = ref<Testimonial[]>([]);
+const responsiveOptions = ref([
+  {
+    breakpoint: '1400px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '1199px',
+    numVisible: 3,
+    numScroll: 1
+  },
+  {
+    breakpoint: '767px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '575px',
+    numVisible: 1,
+    numScroll: 1
+  }
+]);
 
 function getTestimonials(testimonialToHighlight?: string) {
   apiSvc
@@ -58,7 +81,7 @@ getTestimonials();
 
 <template>
   <header>
-    <!-- <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" /> -->
+    <!--
 
     <div class="wrapper">
       <div class="wrapper-testimonial">
@@ -71,20 +94,22 @@ getTestimonials();
         <button @click="saveTestimonial">Save</button>
       </div>
     </div>
+    -->
+
   </header>
 
   <main>
-    <TestimonialComponent
-      v-for="t in existingTestimonials"
-      :key="t._id"
-      :testimonial="t"
-    ></TestimonialComponent>
+
+    <Carousel :value="existingTestimonials" :numVisible="2" :numScroll="1" :responsiveOptions="responsiveOptions"
+      circular :autoplayInterval="3000">
+      <template #item="testimonial">
+        <TestimonialComponent :key="testimonial.data._id" :testimonial="testimonial.data">
+        </TestimonialComponent>
+      </template>
+    </Carousel>
+
   </main>
 
-  <pre style="max-width: 600px; font-family: 'Lucida Console'">
-      {{ JSON.stringify(testimonial, null, 2) }}
-    </pre
-  >
 </template>
 
 <style scoped>

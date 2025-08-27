@@ -22,25 +22,36 @@
     </div>
   </div>
 
-  <div
-    v-bind:id="`testimonialid-${data._id}`"
-    class="testimonial-report"
-    v-if="!inEditMode"
-    style="padding-bottom: 1em"
-  >
-    <p>Rating &nbsp; : &nbsp;{{ data.rating }}</p>
-    <p>{{ data.text }}</p>
-    <p>
-      <span style="text-align: right"> -- {{ data.name }}</span>
-      <span>{{ data.createdAt }}</span>
-    </p>
-    <hr style="border-style: dashed" />
+  <div v-bind:id="`testimonialid-${data._id}`" class="testimonial-report" v-if="!inEditMode"
+    style="padding-bottom: 1em">
+
+
+    <Card>
+      <template #title>{{ data.name }}</template>
+      <template #subtitle>
+        <PrimeRating v-model="data.rating" :stars="Rating.Five" :readonly="true" :cancel="false" />
+      </template>
+      <template #content>
+
+        <p style="width: 100px; height: 150px; ">{{ data.text }}</p>
+
+      </template>
+      <template #footer>
+        <small>{{ data.createdAt }}</small>
+      </template>
+    </Card>
+
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { Rating } from "@/models/Rating.enum";
 import Testimonial from "@/models/Testimonial.model";
+import Card from "primevue/card";
+import PrimeRating from 'primevue/rating';
+
+
 const props = defineProps({
   testimonial: {
     type: Object as () => Testimonial,
@@ -61,25 +72,30 @@ const data: Testimonial = props.testimonial;
   max-width: 600px;
   margin: 0 auto;
 }
+
 .testimonial textarea,
 input,
 select {
   border-style: dashed;
   margin-left: 3px;
 }
+
 form {
   margin-bottom: 20px;
 }
+
 ul {
   list-style: none;
   padding: 0;
 }
+
 li {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
 }
+
 button {
   margin-right: 5px;
 }
