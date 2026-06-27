@@ -1,0 +1,95 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'SS Disability Associates, LLC — Certified disability representative helping individuals obtain Social Security benefits.' } = Astro.props;
+
+const navLinks = [
+  { href: '/',                              label: 'Home' },
+  { href: '/about',                         label: 'About' },
+  { href: '/about/connect',                 label: 'Connect' },
+  { href: '/about/testimonials',            label: 'Testimonials' },
+  { href: '/q-a',                           label: 'Q & A' },
+  { href: '/contacts',                      label: 'Contacts' },
+  { href: '/online-appointments',           label: 'Appointments' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>{title} | SS Disability Associates, LLC</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="bg-brand-900 text-white shadow-md">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="text-lg font-bold tracking-tight hover:text-brand-100 transition-colors">
+          SS Disability Associates, LLC
+        </a>
+        <nav class="hidden md:flex gap-6 text-sm font-medium">
+          {navLinks.map(({ href, label }) => (
+            <a
+              href={href}
+              class={`hover:text-brand-100 transition-colors ${currentPath === href ? 'text-brand-100 underline underline-offset-4' : 'text-white'}`}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+        <!-- Mobile nav toggle (no JS needed for basic version) -->
+        <details class="md:hidden relative">
+          <summary class="list-none cursor-pointer p-2 rounded hover:bg-brand-700">
+            <span class="sr-only">Menu</span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </summary>
+          <nav class="absolute right-0 mt-2 w-56 bg-brand-900 rounded shadow-lg py-2 z-50">
+            {navLinks.map(({ href, label }) => (
+              <a href={href} class="block px-4 py-2 text-sm hover:bg-brand-700 transition-colors">{label}</a>
+            ))}
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-brand-900 text-white mt-16">
+      <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+        <div>
+          <p class="font-semibold text-base mb-2">SS Disability Associates, LLC</p>
+          <p class="text-brand-100">Certified disability representative helping individuals obtain Social Security benefits.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-2">Contact</p>
+          <p>413 16th Street North</p>
+          <p>Birmingham, AL 35203</p>
+          <p class="mt-1"><a href="tel:2053361771" class="hover:text-brand-100">205-336-1771</a></p>
+          <p><a href="mailto:vmanear@ssdisabilityassoc.com" class="hover:text-brand-100">vmanear@ssdisabilityassoc.com</a></p>
+        </div>
+        <div>
+          <p class="font-semibold mb-2">Quick Links</p>
+          <ul class="space-y-1">
+            <li><a href="/about/the-privacy-policy" class="hover:text-brand-100">Privacy Policy</a></li>
+            <li><a href="/about/the-terms-and-conditions" class="hover:text-brand-100">Terms & Conditions</a></li>
+            <li><a href="/online-appointments" class="hover:text-brand-100">Book a Free Consultation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-brand-700 text-center py-4 text-xs text-brand-100">
+        &copy; {new Date().getFullYear()} Vanessa Manear / SS Disability Associates, LLC. All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>
