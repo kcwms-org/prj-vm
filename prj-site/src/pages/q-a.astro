@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    q: 'What are the qualifications for Social Security Benefits?',
+    a: `There are numerous factors that the Social Security Disability Administration considers. To ease some of the fears,
+    listed below are a few of the considerations. It's not entirely reasonable to guess whether one will receive benefits,
+    even with health factors that one may consider limiting to everyday life.`,
+  },
+  {
+    q: 'What are the eligible requirements to receive Social Security disability benefits?',
+    a: `To qualify for Social Security disability benefits, you must have worked long enough in jobs covered by Social Security
+    (usually 10 years). Then, you must have a medical condition that meets Social Security's definition of disability.
+    In general, Social Security pays monthly benefits to people who are unable to work for a year or more, or who have a
+    condition expected to end in death. The disability must be so severe the worker cannot work, considering age, education,
+    and experience.`,
+  },
+  {
+    q: 'Why should I seek a representative, rather than handle filing for myself?',
+    a: `Applicants filing alone can get confused by the requirements set forth by the government, and errors can lead to the
+    denial of one's claim. Studies have shown that an individual is more likely to receive a favorable verdict when being
+    represented. SS Disability Associates LLC can be that representative.`,
+  },
+  {
+    q: 'How do I apply for Social Security Disability benefits?',
+    a: `You can apply online at SSA.gov, by calling the SSA at 1-800-772-1213, or by scheduling an appointment at your local
+    SSA office. Gather all necessary documents before applying — including medical records, work history, and relevant
+    financial information. Apply as soon as you believe you qualify; delaying can complicate the process and affect potential
+    retroactive benefits.`,
+  },
+  {
+    q: 'If approved for disability, how much will I receive?',
+    a: `The amount of disability benefits depends on your work history. Social Security Disability Insurance (SSDI) has a
+    five-month waiting period — payments begin on the sixth full month of disability. Supplemental Security Income (SSI)
+    is a federal income supplement funded by general tax revenues, available to those with limited income and resources,
+    including children with disabilities.`,
+  },
+  {
+    q: 'How long does it take to get a decision after applying?',
+    a: `The time varies depending on how quickly Social Security can obtain your medical evidence, whether a medical examination
+    is needed, and whether SSA reviews your application for quality purposes.`,
+  },
+];
+---
+<BaseLayout title="Q & A" description="Common questions about Social Security disability benefits answered by SS Disability Associates, LLC.">
+  <section class="bg-brand-900 text-white py-16 px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-4xl font-bold mb-4">Common Questions</h1>
+      <p class="text-brand-100 text-lg">Don't assume an unfavorable outcome. Let us help you.</p>
+    </div>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 py-16 space-y-6">
+    {faqs.map(({ q, a }) => (
+      <details class="group border border-gray-200 rounded-xl overflow-hidden">
+        <summary class="flex justify-between items-center cursor-pointer px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors font-semibold text-brand-900">
+          {q}
+          <svg class="w-5 h-5 flex-shrink-0 ml-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </summary>
+        <div class="px-6 py-4 text-gray-700 leading-relaxed">
+          <p>{a}</p>
+        </div>
+      </details>
+    ))}
+  </section>
+
+  <section class="bg-gray-50 py-12 px-4 text-center">
+    <p class="text-gray-600 mb-4">Have more questions? We're here to help.</p>
+    <a href="/online-appointments" class="inline-block bg-brand-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-brand-900 transition-colors">
+      Book a Free Consultation
+    </a>
+  </section>
+</BaseLayout>
