@@ -1,66 +1,19 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'the-privacy-policy');
+if (!entry) throw new Error('Missing content entry: pages/the-privacy-policy');
+const { Content } = await render(entry);
 ---
-<BaseLayout title="Privacy Policy" description="SS Disability Associates, LLC Privacy Policy.">
+<BaseLayout title={entry.data.title} description={entry.data.description}>
   <section class="bg-brand-900 text-white py-16 px-4 text-center">
     <div class="max-w-2xl mx-auto">
-      <h1 class="text-4xl font-bold mb-4">Privacy Policy</h1>
+      <h1 class="text-4xl font-bold mb-4">{entry.data.title}</h1>
     </div>
   </section>
 
   <section class="max-w-3xl mx-auto px-4 py-16 prose prose-gray max-w-none">
-    <h2>SS DISABILITY ASSOCIATES LLC. Privacy Policy</h2>
-    <p>
-      SS DISABILITY ASSOCIATES LLC. and its affiliates value the privacy of individuals who use our websites, app, and related
-      services (collectively, our "Services"). This Privacy Notice explains how we collect, use, and share the information of
-      users of our Services. By using our Services, you agree to the collection, use, disclosure, and processing of your
-      information as described by this Privacy Notice.
-    </p>
-
-    <h3>Information We Collect</h3>
-    <p>We may collect a variety of information about you or your devices from various sources, including:</p>
-    <ul>
-      <li><strong>Registration information</strong> — name, email, phone number, or mailing address when you sign up or contact us.</li>
-      <li><strong>Communications</strong> — contents of messages or attachments you send to us.</li>
-      <li><strong>Event registration</strong> — name, address, title, company, phone number, or email for events you register for.</li>
-      <li><strong>Payment information</strong> — collected by our third-party payment processor.</li>
-      <li><strong>Device &amp; usage data</strong> — IP address, browser type, OS version, session lengths, pages viewed.</li>
-      <li><strong>Cookies</strong> — session and persistent cookies to help us understand how you use our Services.</li>
-    </ul>
-
-    <h3>Informed Consent to be Contacted by Telephone</h3>
-    <p>
-      By registering on the Site, you agree that such act constitutes an inquiry and/or application for purposes of the Amended
-      Telemarketing Sales Rule and applicable state do-not-call regulations. You consent to receive telephone calls, including
-      artificial voice and pre-recorded messages, to the telephone number(s) you provided.
-    </p>
-
-    <h3>How We Use Your Information</h3>
-    <ul>
-      <li>To provide, maintain, improve, and enhance our Services</li>
-      <li>To communicate with you and respond to your requests</li>
-      <li>For marketing and advertising purposes</li>
-      <li>To detect and prevent fraud</li>
-      <li>For legal compliance purposes</li>
-    </ul>
-
-    <h3>How We Share Your Information</h3>
-    <p>
-      We may share information with service providers retained in connection with the provision of our Services. No mobile
-      information will be shared with third parties/affiliates for marketing/promotional purposes. We use Google, Meta,
-      Facebook, LinkedIn, and Microsoft services for analytics and advertising.
-    </p>
-
-    <h3>Your Choices</h3>
-    <p>
-      You may unsubscribe from promotional emails via the link in those emails. You can manage cookies through your browser
-      settings. To opt out of SMS, reply STOP to any message.
-    </p>
-
-    <h3>Contact</h3>
-    <p>
-      413 16th Street North, Birmingham, AL 35203<br />
-      <a href="mailto:vmanear@ssdisabilityassoc.com">vmanear@ssdisabilityassoc.com</a>
-    </p>
+    <Content />
   </section>
 </BaseLayout>

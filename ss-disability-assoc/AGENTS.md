@@ -21,6 +21,7 @@ npm run type-check  # astro check (TypeScript + template types)
   `@theme` config, not `tailwind.config.mjs`)
 - **Vue 3** — available via `@astrojs/vue` for interactive islands (no `.vue` components in
   use yet; add them under `src/components/` as needed)
+- **`@tailwindcss/typography`** — powers the `prose` classes used to style rendered markdown
 
 ## Structure
 
@@ -28,12 +29,24 @@ npm run type-check  # astro check (TypeScript + template types)
 src/
   layouts/BaseLayout.astro   # shared nav + footer, imports styles/global.css
   pages/                     # one .astro file per route
+  content.config.ts          # defines the `pages` content collection (glob loader)
+  content/pages/*.md         # long-form markdown content (legal pages, appointments copy)
   styles/global.css          # Tailwind import + @theme (brand colors, Inter font)
   assets/images/             # source images
 public/                      # static files served as-is (favicon, etc.)
 ```
 
 Path alias `@/*` → `src/*` (see `tsconfig.json`).
+
+### Markdown content pages
+
+`the-privacy-policy.astro`, `the-terms-and-conditions.astro`, and `online-appointments.astro`
+are thin templates: they call `getEntry('pages', <slug>)` + `render()` from `astro:content`
+and drop the result into a `.prose` wrapper. To edit their copy, edit the corresponding
+`.md` file in `src/content/pages/` — frontmatter `title`/`description` feed the page `<title>`
+and meta description. To add a new markdown-backed page, drop a `.md` file in
+`src/content/pages/` (schema: `title`, `description`) and create a matching `.astro` route
+following the same pattern.
 
 ## Development
 
