@@ -10,4 +10,12 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { pages };
+const faqs = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/faqs' }),
+  schema: z.object({
+    question: z.string(),
+    order: z.number(),
+  }),
+});
+
+export const collections = { pages, faqs };
